@@ -66,7 +66,7 @@ also need the MANIFEST file?
       with `pip`
 - [`wheel`](https://wheel.readthedocs.io/en/stable/)
   provides the `bdist_wheel` command used in `setuptools` to
-  build the wheel binary distribution
+  build the wheel
     - `wheel` is not meant to be used directly
     - just install `wheel`:
         - `pip install --upgrade wheel`
@@ -467,7 +467,7 @@ Important commands are:
 - [develop](https://setuptools.readthedocs.io/en/latest/setuptools.html#develop-deploy-the-project-source-in-development-mode) creates a symbolic link, as if the project was installed on sys.path
 - [sdist](https://setuptools.readthedocs.io/en/latest/setuptools.html#basic-use) creates **source** distribution archives in the `dist` directory
     - the archive is the .tar.gz that gets uploaded to PyPI
-- [bdist_wheel](https://setuptools.readthedocs.io/en/latest/setuptools.html#distributing-a-setuptools-based-project) creates **binary** distribution archives in the `dist` directory
+- [bdist_wheel](https://setuptools.readthedocs.io/en/latest/setuptools.html#distributing-a-setuptools-based-project) creates **built** distribution archives in the `dist` directory
     - the archive is the .tar.gz that gets uploaded to PyPI
 
 Commands can be combined, for example:
@@ -476,7 +476,7 @@ Commands can be combined, for example:
 $ python setup.py sdist bdist_wheel
 ```
 
-This generates both the source distribution and the binary
+This generates both the source distribution and the built
 distribution.
 
 Note that `setup.py` does not have a command to upload to PyPI.
