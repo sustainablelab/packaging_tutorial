@@ -43,6 +43,21 @@ Script `setup.py` adds additional files to the wheel with
   distribution also takes care of putting the project's files in
   the sys.path
 
+The `source distribution` should not include files that are not
+included in the Git repository. The easy way to do this is to
+make a `.gitignore` file. This is a top-level file with the same
+syntax is the same as the `.git/info/exclude` file. Exclude
+anything the user can build, e.g., `__pycache__`, `dist/`,
+`*.egg-info`.
+
+[gitignore.io](https://www.toptal.com/developers/gitignore/api/python)
+has many more suggestions for what to ignore. But they include
+the `MANIFEST` in this list, which doesn't make sense to me. If a
+MANIFEST file exists, then I had to explicitly make it for the
+source distribution build to include the necessary files, so if I
+expect a user to build their own source distribution, don't they
+also need the MANIFEST file?
+
 ## Python tools for working with packages
 
 - [`setuptools`](https://setuptools.readthedocs.io/en/latest/)
