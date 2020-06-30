@@ -1,30 +1,38 @@
 # Final Notes
 
-Packages for packaging Python projects are always changing. Any
-information on the internet needs to be cross-checked against the
-official documentation for that package. Be especially careful of
-answers on StackOverflow.
+Python packages used for packaging Python projects (e.g.,
+`setuptools` and `wheel`) have changed significantly over the
+past decade. Any information on the internet needs to be
+cross-checked against the official documentation for that
+package. Be especially careful of answers on StackOverflow.
 
 ## Put a package on PyPI
 
 To put a package on PyPI, there are two things to upload:
 
 ### Upload the wheel
-- a built distribution containing just the parts of the project
-  necessary to run the project on the target system (e.g., to
-  import the package)
-- also contains executables installed by the package
-- packages `setuptools` and `wheel` decide what goes into the
-  wheel
-- `setup.py` adds additional files to the wheel with
-  `setuptools.setup()` argument `package_data={}`
-    - includes non-Python files inside of packages
-    - specified as a dictionary with the key as a string
-      and the value as a list of strings
-    - if the key is an empty string, it means look for
-      the files in all packages
-    - the strings in the value can be specific file names
-      or glob-style search patterns
+
+A `wheel` is a [built
+distribution](https://packaging.python.org/glossary/#term-built-distribution).
+It contains just the parts of the project necessary to run the
+project on the target system. For example, the wheel contains all
+the Python packages and other files necessary to import the
+package. The wheel also contains any executables installed by the
+package.
+
+Python packages `setuptools` and `wheel` decide which project
+files go into the wheel.
+
+Script `setup.py` adds additional files to the wheel with
+`setuptools.setup()` argument `package_data={}`:
+
+- includes non-Python files inside of packages
+- specified as a dictionary with the key as a string
+  and the value as a list of strings
+- if the key is an empty string, it means look for
+  the files in all packages
+- the strings in the value can be specific file names
+  or glob-style search patterns
 
 ### Upload the source
 
