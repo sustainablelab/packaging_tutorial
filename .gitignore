@@ -1,0 +1,7 @@
+*.[oa]
+*~
+*.sw[mnop]
+__pycache__/
+dist/
+*.egg-info/
+MANIFEST*
