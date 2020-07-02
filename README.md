@@ -89,6 +89,9 @@ me. At the 23min mark, he does `git add MANIFEST.in` after using
     - `wheel` is not meant to be used directly
     - just install `wheel`:
         - `pip install --upgrade wheel`
+        - without `wheel` attempting a `python setup.py
+          bdist_wheel` results in `error: invalid command
+          `bdist_wheel`
     - then build the project wheel using `setuptools` in a
       `setup.py` script:
         - `python setup.py bdist_wheel`
