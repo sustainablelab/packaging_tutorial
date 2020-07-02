@@ -1,7 +1,6 @@
-*.[oa]
 *~
 *.sw[mnop]
 __pycache__/
+build/
 dist/
 *.egg-info/
-build/
