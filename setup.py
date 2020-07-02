@@ -1,13 +1,18 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 import setuptools
 
-with open("README.md", "r") as fh:
+# Show README.md as PyPI "Project description".
+with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
+# open with utf-8 encoding for tree symbols: └─, ├─, etc.
+
 setuptools.setup(
-    name="example-pkg-mostly-upright", # Replace with your own username
-    version="0.0.1",
+    name="example_pkg_mostly_upright", # no dashes in name!
+    version="0.0.4", # must increment this to re-upload
     author="Mike Gazes",
-    author_email="author@example.com",
+    author_email="sustainablelab@gmail.com",
     description="A small example package",
     long_description=long_description,
     long_description_content_type="text/markdown",
