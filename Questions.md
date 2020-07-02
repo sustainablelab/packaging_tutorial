@@ -195,16 +195,24 @@ in that same folder. The structure is completely flat.
 
 ## What is the package that uses the `.gitignore` file when making the `sdist`?
 
+The Python package is called `check-manifest`.
+
+I install it in PowerShell.
+
 ```powershell
 > pip install check-manifest
 ```
 
+That is all I need to do to run `check-manifest` from the Cygwin
+bash command line.
+
+- open `bash`
 - `cd` into the project folder
 - the folder must already have a `setup.py` file and a
   `.gitignore` file
 
-```powershell
-> check-manifest --create
+```bash
+$ check-manifest --create
 ```
 
 *This creates `MANIFEST.in`.*
