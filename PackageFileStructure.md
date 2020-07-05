@@ -107,7 +107,17 @@ still works.
 
 # Move the `__init__.py` into the `src` folder
 With `__init__.py` in the `src` folder, I revert to the original
-`__init__.py` file. But now I need to import `pygs.src`, and the
+`__init__.py` file:
+
+```python
+from .window import Window
+from .clock  import Clock
+from . import user
+from . import plot
+from .colors import HEX,RGB
+```
+
+But now I need to import `pygs.src`, and the
 namespacing becomes `pygs.src.user`, `pygs.src.plot`,
 `pygs.src.Clock`, etc. I want to get rid of that `src`.
 
@@ -147,6 +157,8 @@ pygs
 
 Now I have a valid package structure.
 
+## Cloning to USERSITE
+
 To clone the repo and use the package without doing the usual
 install, simply add the project path to the PYTHONPATH.
 
@@ -157,10 +169,58 @@ enough. Add the top-level `pygs` folder to the PYTHONPATH:
 $env:PYTHONPATH += {your USERSITE path goes here}\pygs;"
 ```
 
+## Forget USERSITE and install as --editable
 It's nice to clone to USERSITE and have things *just work*. But
 then the structure is not correct for packaging. This is
 unavoidable.
 
-And really, once the project is set up for packaging, users can
-clone it anywhere and run setup with `-e` to create the symbolic
-link.
+So forget cloning to USERSITE. If I have a package to publish, I
+use the package structure described above, then I continue
+development on it by `pip install` with `--editable` mode.
+
+Sharing with another developer (or with myself on another
+machine), clone the repository to wherever and `pip install` in
+`--editable`. This just creates a symbolic link which can always
+be removed with `pip uninstall`.
+
+### Example of `pip install -e .`
+
+Enter the package's project folder. For example, I wrote a
+package named `pygstuff`:
+
+```bash
+$ cd foo/pygstuff
+```
+
+*`foo` is whatever directory `pygstuff` was cloned in*
+
+And install `pygstuff` in *editable* mode:
+
+```bash
+$ pip install -e .
+```
+
+- the `-e` is short for `--editable`
+- the `.` is the path to the project folder
+    - (`.` means present working directory)
+    - pip finds the `setup.py` file in the `pygstuff` project folder
+    - the project folder is the present working directory
+    - alternatively I could run `pip install -e` from wherever
+      and instead of `.` specify the path to the cloned
+      repository
+
+This is like `pip install`, but it places a *symbolic link* in
+the Python install folder *instead of the actual project files*.
+
+Check this with `pip show` command:
+
+```bash
+$ pip show pygstuff
+```
+
+See how the `Location` field shows the local repository path
+rather than the usual `site-packages` install path.
+
+This means that edits to the source code are immediately
+reflected on the next `import pygstuff`, without having to reinstall
+the package.

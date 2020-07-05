@@ -44,6 +44,14 @@ $ check-manifest.exe
 
 *This check creates the `egg-info/` folder.*
 
+Check the `*./egg-info/PKG-INFO` file. This information shows up
+on the PyPI (or TestPyPI) page, and is displayed when users do
+`pip show PACKAGENAME`. For example:
+
+- check the `Home-page` is correct
+- search for `UNKNOWN` to find arguments missing from the call to
+  `setuptools.setup()` in `setup.py`.
+
 Rebuild the distributions:
 
 ```bash
@@ -75,10 +83,18 @@ Create a virtual environment:
 ```
 
 Install the package. Since the package is not on PyPI, use `-i`
-to specify the package URL is TestPyPI:
+or `--index-url` to specify the package URL is TestPyPI:
 
 ```powershell
 (test-install) > pip install -i https://test.pypi.org/simple/ PROJECTNAME
+```
+
+If the package has dependencies on packages that are not on
+TestPyPI, use `--extra-index-url` to get the dependencies from
+PyPI:
+
+```powershell
+(test-install) > pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple PROJECTNAME
 ```
 
 *Follow the rule that PROJECTNAME == PACKAGENAME.*
@@ -108,8 +124,16 @@ Make sure the upload is good by uploading to TestPyPI first. The
 same deletion rules apply (deleting is discouraged), but the
 accounts and packages there are periodically deleted. So a
 publish test on TestPyPI may require incrementing the version
-number a few times to get it right. Remember to reset to the
-original version number before uploading to PyPI.
+number a few times to get it right.
+
+**Remember to reset to the original version number before
+uploading to PyPI.**
+
+Import to PyPI by leaving off the `--repository` argument:
+
+```bash
+$ twine upload dist/*
+```
 
 ## Use UTF-8 in the "Project description"
 The following line in `setup.py` uses README.md as the *Project
@@ -175,8 +199,8 @@ Anyway, this XKCD comic sums it up best:
 
 # Also see
 
-- PackageFileStructure.md
-- PackagingTutorial.md
-- Questions.md
-- PublishOnPyPI.md
+- [PackageFileStructure.md](PackageFileStructure.md)
+- [PackagingTutorial.md](PackagingTutorial.md)
+- [Questions.md](Questions.md)
+- [PublishOnPyPI.md](PublishOnPyPI.md)
 
