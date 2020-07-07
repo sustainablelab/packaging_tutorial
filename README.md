@@ -97,6 +97,15 @@ PyPI:
 (test-install) > pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple PROJECTNAME
 ```
 
+Example, test installing `microspec`:
+
+```powershell
+(test-install) > pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ microspec
+```
+
+The `--extra-index-url` is required for `pip` to find requirement
+`pyserial`.
+
 *Follow the rule that PROJECTNAME == PACKAGENAME.*
 
 Check the package is installed:
