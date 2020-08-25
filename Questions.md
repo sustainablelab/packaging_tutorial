@@ -193,7 +193,7 @@ And as for the `__init__.py` file, that works exactly as it did
 cleans up redundant namespacing. All of the modules are scripts
 in that same folder. The structure is completely flat.
 
-## What is the package that uses the `.gitignore` file when making the `sdist`?
+## What is the package that uses the Git index when making the sdist?
 
 The Python package is called `check-manifest`.
 
@@ -208,8 +208,17 @@ bash command line.
 
 - open `bash`
 - `cd` into the project folder
-- the folder must already have a `setup.py` file and a
-  `.gitignore` file
+- the folder must already have a `setup.py` file
+- exclude build files from version control
+    - `check-manifest` issues a warning if you forget to exclude
+      build files from version control
+- better to use a `.gitignore` file than to use
+  `.git/info/exclude` for excluding build files
+    - this way the list of ignored files is under version
+      control
+        - so the ignore list is part of the project
+        - so it's easier to rebuild the distribution from other
+          machines
 
 ```bash
 $ check-manifest --create
